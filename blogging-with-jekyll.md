@@ -53,7 +53,7 @@ If it finds no such comment, it simply uses the first filter to extract the firs
 
 In my <a href="/index.html">index.html</a>, the `preview` filter is used as in the following (somewhat simplified) example.
 
-```
+```html
 {% for post in paginator.posts %}
     <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
     {{ post.content | preview }}
@@ -97,16 +97,20 @@ jekyll --no-auto
 
 Jekyll offers easy code highlighting out of the box, as long as you install <a href="http://pygments.org/">Pygments</a>.
 
-    {% raw %}
-    {% highlight ruby %}
-    code goes here
-    {% endhighlight %}
-    {% endraw %}
+```
+{% raw %}
+{% highlight ruby %}
+code goes here
+{% endhighlight %}
+{% endraw %}
+```
 
 This will add appropriate CSS classes to the keywords in your code snippet.
 The default color scheme can be generated using the following command:
 
-    pygmentize -S default -f html > css/pygments.css
+```bash
+pygmentize -S default -f html > css/pygments.css
+```
 
 You can of course also change `ruby` to one of the other <a href="http://pygments.org/languages/">languages supported by Pygments</a>.
 

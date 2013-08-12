@@ -28,24 +28,28 @@ Listed below are the shortcuts I have found I use the most to make working with 
 
 Shortcuts for working with and sending requests:
 
-- `Alt`+`Enter` (when the request is focused) will submit the request, and move focus to the response pane.
-- `Alt`+`←`/`→` moves the cursor to the value of the previous/next field in the request or response. 
-- `Alt`+`F` formats the request by removing blank lines and fixing indentation. Will not work if the request is not valid. 
-- `Alt`+`V` validates the request according to the schema. Given validation errors, it will usually provide sufficient information to let you know what to fix.
-- `F3` or `Ctrl`+`F` brings up the search/replace dialog for the request or the response.
-- `Ctrl`+`D` deletes the line with the cursor. Does not work for multiple lines; instead of deleting all selected lines, only the one where the cursor is actually resting is deleted.
-- `F5` reloads a complete request from schema, optionally keeping any values already filled in.
-- `Alt`+`L` toggles line numbers in the request editor.
+
+ Keys               | Description
+ -------------------|--------------
+ `Alt`+`Enter`      | (when the request is focused) will submit the request, and move focus to the response pane. 
+ `Alt`+`←`/`→`      | moves the cursor to the value of the previous/next field in the request or response. 
+ `Alt`+`F`          | formats the request by removing blank lines and fixing indentation. Will not work if the request is not valid. 
+ `Alt`+`V`          | validates the request according to the schema. Given validation errors, it will usually provide sufficient information to let you know what to fix.
+ `F3` or `Ctrl`+`F` | brings up the search/replace dialog for the request or the response.
+ `Ctrl`+`D`         | deletes the line with the cursor. Does not work for multiple lines; instead of deleting all selected lines, only the one where the cursor is actually resting is deleted.
+ `F5`               | reloads a complete request from schema, optionally keeping any values already filled in.
+ `Alt`+`L`          | toggles line numbers in the request editor.
 
 Shortcuts for administrating the open SoapUI windows:
 
-- `Ctrl`+`W` provides a dialog which will let you switch between your open requests using the arrow keys and `Enter`. Really useful, but only if you remember to give the requests meaningful names.
-- `Ctrl`+`F9` minimizes the focused request window. Press repeatedly to clean up the workspace quickly.
-- `Ctrl`+`F4` will instead close the focused request window.
-- `Ctrl`+`Alt`+`L` closes all the windows, unless the request editor has focus, in which case the _goto line_ dialog box will appear.
-- `Ctrl`+`Alt`+`O` closes all windows except the one with focus.
-- `Ctrl`+`M` toggles maximized SoapUI desktop, i.e. hide/show the sidebar navigator.
+ Keys               | Description
+ ------------------ | -------------
+ `Ctrl`+`W`         | provides a dialog which will let you switch between your open requests using the arrow keys and `Enter`. Really useful, but only if you remember to give the requests meaningful names.
+ `Ctrl`+`F9`        | minimizes the focused request window. Press repeatedly to clean up the workspace quickly.
+ `Ctrl`+`F4`        | will instead close the focused request window.
+ `Ctrl`+`Alt`+`L`   | closes all the windows, unless the request editor has focus, in which case the _goto line_ dialog box will appear.
+ `Ctrl`+`Alt`+`O`   | closes all windows except the one with focus.
+ `Ctrl`+`M`         | toggles maximized SoapUI desktop, i.e. hide/show the sidebar navigator.
 
 Besides these, I have found several references to the shortcut `Ctrl`+`Alt`+`Tab`, which supposedly shifts the focus between the request and response panels of the focused window.
 This unfortunately does not work for me, but perhaps you'll have more luck?
-
