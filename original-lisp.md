@@ -509,7 +509,7 @@ The helper function `pair` is simply used conveniently to create lists of two el
 ((a 1) (b 2) (c 3))
 ```
 
-## Completing the
+## Completing the language
 
 Alle these functions are all nice and well, but one thing is still lacking. 
 One of the central concepts in Lisp that code is data, and vice versa.
