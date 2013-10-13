@@ -1,4 +1,4 @@
-date: 2013-08-05
+date: 2013-10-14
 title: Implementing (the original) Lisp in Python
 description: "To understand what Lisp is all about, let's go back to the roots and 
     have a look at John McCarthy's original Lisp. By implementing it in Python, we see 
