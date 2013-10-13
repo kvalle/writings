@@ -214,7 +214,7 @@ And it works as expected:
 
 ### Evaluating `atom`
 
-The next case, `atom` determines whether the value of `e` is atomic or not.
+The next case, `atom` determines whether the value of `exp` is atomic or not.
 
 ```python
 def atom(exp, env):
@@ -241,7 +241,8 @@ The `eq` function is defined as `t` if the value of its two arguments evaluates 
 ```python
 def eq(exp, env):
     # (eq e1 e2)
-    v1, v2 = eval(exp[1], env), eval(exp[2], env)
+    v1 = eval(exp[1], env)
+    v2 = eval(exp[2], env)
     return 't' if v1 == v2 and is_atom(v1) else 'f'
 ```
 
@@ -256,7 +257,7 @@ def eq(exp, env):
 
 ### Evaluating `car` and `cdr`
 
-The `car` and `cdr` forms both evaluate the argument, expecting the resulting value to be a list. `car` returns the first item of the list. `cdr` returns the rest of the list, i.e. everything but the first element.
+The `car` and `cdr` forms both evaluate the argument, expecting the resulting value to be a list. `car` returns the first item of the list; `cdr` returns the rest of the list, i.e. everything but the first element.
 
 ```python
 def car(exp, env):
@@ -314,7 +315,7 @@ def cond(exp, env):
             return eval(e, env)
 ```
 
-Like McCarthy's original Lisp, our `cond` is also undefined for cases where no `p` expressions evaluate to `t`.
+Like in McCarthy's original Lisp, our `cond` is also undefined for cases where no `p` expressions evaluate to `t`.
 
 ```python
 >>> program = """
@@ -353,7 +354,7 @@ To see what's happening, lets look at the environment after evaluating a `defun`
 
 ### Evaluating function calls
 
-To round of the case when the first element in `exp` in `eval` is an atom, we simply look up this atom up in the environment, expecting to find a function. A new list with this function as the first element is then evaluated instead.
+To round of the case when the first element in `exp` in `eval` is an atom, we simply look this atom up in the environment, expecting to find a function. A new list with this function as the first element is then evaluated instead.
 
 ```python
 def call_named_fn(exp, env):
@@ -373,7 +374,7 @@ Lets try testing this by calling the `pair` function we defined with `defun` abo
 
 ### Evaluating `lambda` application
 
-In the example above, `pair` is looked up in the environment and a new s-expression is evaluated. This new expression holds a function rather than an atom as the first element. Thus, the first element looks something like `(lambda (list of parameters) body)`. The rest of the elements in `e` are the arguments to the function. The `apply` function evaluates such expressions.
+In the example above, `pair` is looked up in the environment and a new s-expression is evaluated. This new expression holds a function rather than an atom as the first element. (Actually, it holds a `label` with a function, but the `label` is stripped away in an intermediate step as explained bellow.) Thus, we end up evaluating an expression where the first element looks something like `(lambda (list of parameters) body)`. The rest of the elements in `exp` are the arguments to the function. The `apply` function evaluates such expressions.
 
 ```python
 def apply(exp, env):
@@ -401,7 +402,7 @@ The first line separates the lambda-expression `fn` and the arguments. The funct
 
 The `lambda` syntax above is fine for defining normal non-recursive functions. It is also expressive enough to make recursive functions using the [Y-combinator][y-combinator], but for this McCarthy introduces the `label` notation instead (which arguably is a lot easier to understand).
 
-This evaluation case considers expressions on the form `((label name lambda-expression) arguments) the arguments)`.
+This evaluation case considers expressions on the form `((label name lambda-expression) arguments)`.
 
 ```python
 def label(e, a):
@@ -411,7 +412,7 @@ def label(e, a):
     return eval([fn] + args, [(f, e[0])] + a)
 ```
 
-We handle this by extending the environment `name` pointing to the first element of `e`, the `label` expression. The `lambda` function is then applied to the rest of the elements of `e`, the arguments, and the value returned.
+We handle this by extending the environment such that `name` points to the first element of `e`, i.e. the `label` expression. The `lambda` function is then applied to the rest of the elements of `e` (the arguments) in this environment, and the value returned.
 
 Lets se an example:
 
@@ -480,7 +481,7 @@ Further we can define some functions working on lists. First `append`, which tak
           ('t (cons (car x) (append (cdr x) y)))))
 ```
 
-A couple of tests shows how it works:
+A couple of tests shows that it works:
 
 ```common-lisp
 > (append '(1 2 3) '(a b c))
@@ -502,7 +503,7 @@ Another useful function is `zip`, which takes two lists as arguments, returning 
                (zip (cdr x) (cdr y))))))
 ```
 
-The helper function `pair` is simply used conveniently to create lists of two elements.
+The helper function `pair` is simply used as a convenience for creating lists of two elements.
 
 ```common-lisp
 > (zip '(a b c) '(1 2 3))
@@ -511,7 +512,7 @@ The helper function `pair` is simply used conveniently to create lists of two el
 
 ## Completing the language
 
-Alle these functions are all nice and well, but one thing is still lacking. 
+These functions are all nice and well, but one thing is still lacking. 
 One of the central concepts in Lisp is that *code is data*, and vice versa.
 We already have `quote` which enables us to convert code into lists, but we still need some way to evaluate lists as if they were Lisp code again. 
 
@@ -537,7 +538,7 @@ Next, we need a function to help us look up values from an environment.
         ('t (assoc var (cdr lst)))))
 ```
 
-`assoc` takes two arguments, the variable we with to look up `var` and a list of bindings `lst`. The bindings in `lst` are lists of two elements, and `assoc` simply returns the second element of the first pair where the first element is the same as `var`.
+`assoc` takes two arguments: the variable we wish to look up, `var`, and a list of bindings, `lst`. The bindings in `lst` are lists of two elements, and `assoc` simply returns the second element of the first pair where the first element is the same as `var`.
 
 ```common-lisp
 > (assoc 'x '((x a) (y b)))
@@ -594,7 +595,7 @@ As you see, the Lisp version of `eval` is very similar to the one we implemented
 (foo bar baz)
 ```
 
-We now actaully have the Lisp implemented in terms of the Lisp itself.
+We have the Lisp implemented in terms of the Lisp itself.
 
 ## Summary
 
@@ -604,9 +605,9 @@ The core of the language is pretty small. Given only a handful of axiomatic form
 
 Of course, while being a neat little language, our Lisp is missing a lot of features we expect in programming languages today. For example, it has no side effects (no IO), no types other than atoms (e.g. no numbers, strings, etc), no error handling, and it has dynamic rather than lexical scoping. The behaviour is also undefined for incorrect programs, and as an effect of this the error messages (which would bubble up from Python) can be rather strange and uninformative at times.
 
-Most of this could easily be rectified, though. Either from within the Lisp itself, or by changing the evaluator in Python. To learn about some of the improvements that could be made, notably *lexical scoping* and *mutable state*, I reccomend to have a look at [The Art of the Interpreter][art-interpreter] by Steele and Sussman.
+Most of this could easily be rectified, though. Either from within the Lisp itself, or by changing the Python implementation. To learn about some of the improvements that could be made, notably *lexical scoping* and *mutable state*, I reccomend to have a look at [The Art of the Interpreter][art-interpreter] by Steele and Sussman.
 
-I hope this blogpost have peaked your interest in how languages work, and that you find the implementation of Lisp as delightfully simple as I do.
+I hope this blogpost have peaked your interest in how programming languages work, and that you find the implementation of Lisp as delightful as I do.
 
 [rec-func]: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.111.8833&rep=rep1&type=pdf
 [roots]: http://www.paulgraham.com/rootsoflisp.html
