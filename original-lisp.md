@@ -34,7 +34,7 @@ An *atom* is akin to what many modern languages would call an identifier. It con
 > (another list (with some ((nested)) (lists inside)))
 > ```
 
-In addition, although it's actually not in the original Lisp, we include a shorthand syntax `'x` which is evaluated as `(quote x)`, where `x` is any s-expression. This way, `'(a b c)` is interpreted as`(quote a b c)` and similarly, `'foo` as `(quote foo)`. We will later see why this turns out to be useful.
+In addition, although it's actually not in the original Lisp, we include a shorthand syntax `'x` which is evaluated as `(quote x)`, where `x` is any s-expression. This way, `'(a b c)` is interpreted as`(quote (a b c))` and similarly, `'foo` as `(quote foo)`. We will later see why this turns out to be useful.
 
 ### The basic semantics
 
