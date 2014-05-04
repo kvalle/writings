@@ -33,8 +33,8 @@ Here is a sneak peak of what the final language will look like:
 
 Depending on your level of familiarity with the concepts, the tutorial should take anywhere from a few hours to a day or more to complete. 
 By the end, however, you will have implemented a language with proper lexical scoping, first class functions, and a simple Lisp-like syntax. 
-More importantly, you'll be done making your first language done, and ready to continue exploring.
+More importantly, you'll be done making your first language, and ready to continue exploring.
 
 Have fun!
 
-*Oh, by the way, if you do follow the tutorial and implement a language, I would love to hear your feedback.*
+*And by the way, if you do follow the tutorial and implement a language, I would love to hear your feedback.*
