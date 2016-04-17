@@ -1,6 +1,6 @@
 ## Learn New Languages
 
-I have long been a firm beliver in learning new languages. To quote the linguist [Benjamin Whorf](https://en.wikipedia.org/wiki/Benjamin_Lee_Whorf) (1897-1941): *"language shapes the way we think and determines what we can think about"*. Our programming languages are the tools by which we formalize our ideas as executable code, so of course they infuence our thinking about the problems. Our thoughts are constrained by their concepts, by their fundemental building blocks.
+I have long been a firm beliver in learning new languages. To quote the linguist [Benjamin Whorf](https://en.wikipedia.org/wiki/Benjamin_Lee_Whorf) (1897-1941): *"language shapes the way we think and determines what we can think about"*. Our programming languages are the tools by which we formalize our ideas as executable code, so of course they influence our thinking about the problems. Our thoughts are constrained by their concepts, by their fundemental building blocks.
 This is exactly what makes learning new languages so valuable. It does not only give you a new way to describe computer programs, it also expands your mental toolbox.
 
 Alan Perlis, in one of his his [Epigrams on Programming](http://pu.inf.uni-tuebingen.de/users/klaeren/epigrams.html), fameously stated:
