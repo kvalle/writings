@@ -44,10 +44,13 @@ After lunch on the second day it was finally our turn. We were giving a workshop
 
 We found our way to the venue (which was a different one from where the presentations had taken place) during lunch time and got everything set up. Despite having to compete with another workshop as well as the hugely popular guided tour of Sofia, we had a pretty good crowd showing up.
 
+![Kjetil introduces the workshop](partial/workshop-1.jpg)
+
 At first, after giving the introductory presentation, we felt like we were of to a pretty bad start. We hardly got any questions, as people were just sitting quietly looking at the tasks by themselves. Not at all like the previous few times we've given the workshop! We're not sure if it was a cultural thing, as most of the attendees were local (guess the international guests would, understandably, rather attend the guided tour!), or if it was just this particular group.
 
 However, despite not wanting to ask us anything, we got most of the attendees talking after a while. And it turned out they were making pretty good progress! People seemed to have fun, and we got some hearthwarmingly good feedback from several people as they were leaving.
 
+![Workshop attendees working](partial/workshop-2.jpg)
 
 ## Final Impressions
 
