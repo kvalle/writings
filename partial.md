@@ -30,6 +30,8 @@ Persistent data structures are one of the pillars of functional laguanges. Witho
 
 In what might very well have been the best prestented talk of the conference, Anjana Vakil introduced the concept, motivated why these datastructures are important, and described in broad strokes how they work. It's not the deepest technical description, so if you already know the concepts, this talk probably isn't for you. But if you want a light, fun and accessible introduction, look no further!
 
+![Anjana Vakil talks about immutable data structures](partial/immutable-datastructures.jpg)
+
 #### Saša Jurić: Basic Guarantees of Erlang VM (BEAM)
 
 The virtual machine running Erlang and Elixir, known as BEAM, isn't quite like anything else out there. As Saša Jurić points out in his talk, it was created with the intention to solve a very specific problem, which is does beautifully. And this is what makes it so great.
