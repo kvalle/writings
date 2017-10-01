@@ -16,6 +16,8 @@ We met a lot of interesting and friendly people. Not only among the attendees an
 
 The talks at Partial generally held a high level of quality. The topics were for the most part very accessible to newcommers to FP. There were more in the ways of inspiration and introduction than the really heavy technical deep dives, though without being too basic. This is not a conference to attend if you want to geek out over type systems or category theory, but might be one for you if you're interested in building real software with a functional mindset. 
 
+![The presentations](partial/presentations.jpg)
+
 There are a few talks we would like to highlight. (Videos of the presentations aren't out quite yet, but we'll update the blogpost whith links when they arrive.)
 
 #### Bozhidar Batzov: Clojure: The Bad Parts
