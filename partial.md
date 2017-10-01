@@ -36,6 +36,7 @@ The virtual machine running Erlang and Elixir, known as BEAM, isn't quite like a
 
 He talked about how BEAM works, which guarantees it gives you, and showed some simple yet brilliantly demonstrative demos. We get to see live debugging of processes, drilling down to figure out which user inputs caused the problem, and termination of the runaway resources. All without affecting the performance of the rest of the system. BEAM really is something quite different.
 
+![Saša Jurić talks about BEAM](partial/beam.jpg)
 
 ## Our Workshop
 
