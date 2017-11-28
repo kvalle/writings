@@ -17,8 +17,9 @@ For å finne ut av hvordan tilstanden faktisk er der ute bestemte jeg meg for å
 
 Jeg var i kontakt med 37 forskjellige prosjekter, fordelt hos 26 ulike kunder. Fordelingen så overordnet ut slik:
 
-     FP  |=====     14 (38%)
-    ¬FP  |========= 23 (62%)
+     FP ▕█████     14 (38%)
+    ¬FP ▕█████████ 23 (62%)
+
 
 
 ### Funksjonelle nivåer
@@ -32,9 +33,9 @@ For å skille litt på hvordan FP brukes rundt om delte jeg prosjektene opp i ul
 
 Hvis vi fordeler de 14 prosjektene som bruker FP per nivå, ser resultatet slik ut:
 
-    Nivå 1 🎓 |====         4
-    Nivå 2 🎩 |             0
-    Nivå 3 👑 |==========  10
+    Nivå 1 🎓 ▕████         4
+    Nivå 2 🎩 ▕             0
+    Nivå 3 👑 ▕██████████  10
 
 Hele 10 av 37 prosjekter, dvs 27%, har faktisk FP i produksjon på systemer som er viktige hos kunden!
 
@@ -44,45 +45,45 @@ Dette er riktignok en sannhet med en liten modifikasjon: Jeg har her inkludert n
 
 En del av prosjektene på nivå 3 brukte FP også på nivå 1 eller 2. Tar vi hensyn til dette ser fordelingen slik ut:
 
-      Nivå 1 🎓 |====== 6
-      Nivå 2 🎩 |=== 3
-      Nivå 3 👑 |========== 10
+      Nivå 1 🎓 ▕██████ 6
+      Nivå 2 🎩 ▕███ 3
+      Nivå 3 👑 ▕██████████ 10
 
 ### Valg av språk
 
 Vender vi blikket til hvilke språk vi velger, så har vi denne fordelingen:
 
-    F#     |========== 5
-    Scala  |========== 5
-    Elm    |========== 5
-    Kotlin |==== 2
+    F#     ▕██████████ 5
+    Scala  ▕██████████ 5
+    Elm    ▕██████████ 5
+    Kotlin ▕████ 2
 
 De fire språkene som brukes vil neppe sjokkere noen. F# og Scala er etter hvert modne alternativ i .NET og på JVM-en, Elm har vært veldig populært de siste par årene, og Kotlin, med JetBrains i ryggen, har fått momentum som et enklere alternativ til Scala i det siste.
 
 Men det hjelper ikke å bare vite hvilke språk som brukes, det er også interessant å se hva de brukes til. Hvis vi starter med språkene som brukes på nivå 1, til verktøystøtte, finner vi følgende:
 
-    F#     |======== 4
-    Scala  |===== 3
-    Elm    |
-    Kotlin |
+    F#     ▕████████ 4
+    Scala  ▕█████ 3
+    Elm    ▕
+    Kotlin ▕
 
 Det er Scala og F# som er favorittene her, og det ser ut til at det er to årsaker til dette: [Fake](https://fake.build/) og [Gatling](https://gatling.io/). Fake er et byggesystem à la Make i F#, og er populært på flere av prosjektene våre, og Gatling er et ytelsestestverktøy der man skriver testene i Scala.
 
 På nivå 2 var det ikke like mange prosjekter, men vi ser litt bruk av Elm og F#.
 
-    F#     |== 1
-    Scala  |
-    Elm    |==== 2
-    Kotlin |
+    F#     ▕██ 1
+    Scala  ▕
+    Elm    ▕████ 2
+    Kotlin ▕
 
 Disse løsningene er typisk lite forretningskritiske løsninger, som gjerne bare brukes av utviklere og en liten gruppe interne hos kundene. Et eksempel på en slik er en løsning hos Statens Vegvesen som gir brukerstøtte tilgang til å slå opp hendelser i selvbetjeningssaker når folk ringer inn og lurer på ting.
 
 På nivå 3, de viktigere løsnignene, er alle fire språkene representert, men Elm er den klart vanligste.
 
-    F#     |==== 2
-    Scala  |==== 2
-    Elm    |========== 5
-    Kotlin |==== 2
+    F#     ▕████ 2
+    Scala  ▕████ 2
+    Elm    ▕██████████ 5
+    Kotlin ▕████ 2
 
 At Elm er populær er kanskje ikke overraskende, men det er betryggende å se at det vi prater om i faggrupper, meetups og på konferanse også brukes ute hos kundene.
 
