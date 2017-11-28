@@ -6,7 +6,7 @@ Men det er også flere rent funksjonelle språk som begynner å bli sterke kandi
 
 ## Interesse i BEKK
 
-Vi har lenge hatt folk med interesse for FP i BEKK, men det er tydelig at interssen er økende. 2017 markerte det første året hvor vi hadde en egen faggruppe for funksjonell programmering (fokuset har vært noe bredere på programmeringsspråk generelt tidligere inkarnasjoner av gruppen), og vi hadde også en faggruppe med et initiativ dedikert til å finne ut hvordan Elm som språk passet i BEKK-prosjekter. I tillegg til dette var BEKKere sentrale i å starte [Oslo Elm Meetup](https://www.meetup.com/oslo-elm-meetup/) og å arrangere [Oslo Elm Day](https://osloelmday.no/).
+Vi har lenge hatt folk med interesse for FP i BEKK, men det er tydelig at interssen er økende. 2017 markerte det første året hvor vi hadde en egen faggruppe for funksjonell programmering (temaet har vært programmeringsspråk generelt i tidligere inkarnasjoner av gruppen), og vi hadde også en faggruppe med et initiativ dedikert til å finne ut hvordan Elm som språk vil passe i BEKK-prosjekter. I tillegg til dette var BEKKere sentrale i å starte [Oslo Elm Meetup](https://www.meetup.com/oslo-elm-meetup/) og å arrangere [Oslo Elm Day](https://osloelmday.no/).
 
 
 ## FP i BEKK anno 2017
@@ -20,7 +20,7 @@ Jeg var i kontakt med 37 forskjellige prosjekter, fordelt hos 26 ulike kunder. F
      FP ▕█████     14 (38%)
     ¬FP ▕█████████ 23 (62%)
 
-
+Mer enn ett av tre prosjekter bruker FP i en eller annen grad.
 
 ### Funksjonelle nivåer
 
