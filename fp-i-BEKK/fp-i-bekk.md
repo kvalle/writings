@@ -33,9 +33,9 @@ For å skille litt på hvordan FP brukes rundt om delte jeg prosjektene opp i ul
 
 Hvis vi fordeler de 14 prosjektene som bruker FP per nivå, ser resultatet slik ut:
 
-    Nivå 1 🎓 ▕████████ 4
-    Nivå 2 🎩 ▕ 0
     Nivå 3 👑 ▕████████████████████ 10
+    Nivå 2 🎩 ▕ 0
+    Nivå 1 🎓 ▕████████ 4
 
 Hele 10 av 37 prosjekter, dvs 27%, har faktisk FP i produksjon på systemer som er viktige hos kunden!
 
@@ -45,9 +45,9 @@ Dette er riktignok en sannhet med en liten modifikasjon: Jeg har her inkludert n
 
 En del av prosjektene på nivå 3 brukte FP også på nivå 1 eller 2. Tar vi hensyn til dette ser fordelingen slik ut:
 
-      Nivå 1 🎓 ▕████████████ 6
-      Nivå 2 🎩 ▕██████ 3
       Nivå 3 👑 ▕████████████████████ 10
+      Nivå 2 🎩 ▕██████ 3
+      Nivå 1 🎓 ▕████████████ 6
 
 ### Valg av språk
 
