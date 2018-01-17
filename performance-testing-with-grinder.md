@@ -1,7 +1,16 @@
+---
+date: 2012-11-19
+title: Performance Testing Using Grinder
+external: http://open.bekk.no/performance-testing-using-grinder/
+description: "Learn how to get started performance testing using The Grinder."
+other_authors:
+    - Espen Herseth Halvorsen
+---
+
 Get Started Performance Testing Using The Grinder
 =================================================
 
-Performance testing is important. 
+Performance testing is important.
 In this blog post we will explain why, introduce you to a tool for testing performance called The Grinder, and take you through five examples which will get you started using Grinder for testing your web application.
 
 The post is based on workshops held at [ROOTS](http://www.rootsconf.no/talks/42) and [FreeTest](http://free-test.org/node/81#2012051009-EspenHalvorsen), and the materials -- slides, tasks and code -- are of course [available on GitHub](https://github.com/kvalle/grinder-workshop).
@@ -22,15 +31,15 @@ It really is! Your users will love you, you will earn more money, and unicorns w
 Literary! Or figuratively, whatever word kids use these days. The daily press really loves a god "*important site* down, users takes to the streets"-story. You definately don't want your site's logo on those demonstation signs! And when you then have to go into rush-mode and try to fix things, bad things can (and according to mr. Murphy, often does) happen. That's when Kenneth36 and all those nasty things happens! So you definately want to test performance yourself, and don't leave that task to your users on release-day.
 
 **#3: It's good for your health!**
-[Some guy](http://en.wikipedia.org/wiki/H._James_Harrington) (with lots of gray hairs, that's how you know he's a smart one) once uttered this brilliant quote: 
+[Some guy](http://en.wikipedia.org/wiki/H._James_Harrington) (with lots of gray hairs, that's how you know he's a smart one) once uttered this brilliant quote:
 
-> Measurement is the first step that leads to control and eventually to improvement. 
-> If you can't measure something, you can't understand it. If you can't understand it, you can't control it. 
+> Measurement is the first step that leads to control and eventually to improvement.
+> If you can't measure something, you can't understand it. If you can't understand it, you can't control it.
 > If you can't control it, you can't improve it.
 
-In the end, performance testing really boils down to the basic task of caring about what you do. 
-You unit test your code, sweat over small details in your user interface, and even care about *how* you work (Scrum, Kanban and all that stuff). 
-Why shouldn't you take the same pride in your product's ability to actually serve your users, and don't fall down when everyone and their grandmas come knocking. 
+In the end, performance testing really boils down to the basic task of caring about what you do.
+You unit test your code, sweat over small details in your user interface, and even care about *how* you work (Scrum, Kanban and all that stuff).
+Why shouldn't you take the same pride in your product's ability to actually serve your users, and don't fall down when everyone and their grandmas come knocking.
 Well, we think you should!
 
 Enough about that, now that you are properly motivated, we'll put on our "serious-glasses" and start doing some real work:
@@ -90,7 +99,7 @@ def hello_world():
     print '> worker thread %d: hello world!' % thread
 
 class TestRunner:
-            
+
     def __init__(self):
         # creating a Grinder test object
         test = Test(1, "saying hello")
@@ -99,7 +108,7 @@ class TestRunner:
 
     def __call__(self):
         # calling "hello world" through the wrapped function
-        self.wrapped_hello() 
+        self.wrapped_hello()
 ```
 
 The important part to note in the above code is the `Test` object.
@@ -163,7 +172,7 @@ When you are finished with these simple steps, you can check that everything wor
 
     cd grinder-workshop
     ./startAgent.sh example/scenario.properties
-  
+
 When you run this example, Grinder will output some information.
 First there will be some information about what happens during the start-up of Grinder, and then some lines of 'hello world' while running the test script.
 This should look something like the following:
@@ -191,18 +200,18 @@ First, we need some setup.
 Like in the "hello world" example, we start with a simple configuration file in `1.properties`.
 
     grinder.script = scripts/task1.py
-    
+
     grinder.processes = 1
     grinder.threads = 1
     grinder.runs = 10
-    
+
     grinder.useConsole = false
     grinder.logDirectory = log
 
 There's not much new here.
 Again, the first property informs Grinder which test script to run.
 The second group of properties specifies how much load the test will utilize.
-The defaults for all three properties are 1. 
+The defaults for all three properties are 1.
 Our setup will run the test 10 times sequentially in a single thread.
 The last properties are identical to the previous example.
 
@@ -215,11 +224,11 @@ from net.grinder.script import Test
 from net.grinder.plugin.http import HTTPRequest
 
 class TestRunner:
-    
+
     def __init__(self):
         test = Test(1, "GETing some webpage")
         self.request = test.wrap(HTTPRequest())
-    
+
     def __call__(self):
         self.request.GET("http://foobar.example.com/page42")
 ```
@@ -281,7 +290,7 @@ from net.grinder.plugin.http import HTTPRequest
 url_file_path = grinder.getProperties().getProperty('task2.urls')
 
 class TestRunner:
-    
+
     def __init__(self):
         url_file = open(url_file_path)
         self.tests = []
@@ -291,7 +300,7 @@ class TestRunner:
             request = test.wrap(HTTPRequest())
             self.tests.append((request, url))
         url_file.close()
-    
+
     def __call__(self):
         for request, url in self.tests:
             request.GET(url)
@@ -317,7 +326,7 @@ Run:
 
 Which should give you something like the following included at the end of the log file:
 
-                 Tests        Errors       Mean Test    Test Time    TPS          Mean         Response     Response     Mean time to Mean time to Mean time to 
+                 Tests        Errors       Mean Test    Test Time    TPS          Mean         Response     Response     Mean time to Mean time to Mean time to
                                            Time (ms)    Standard                  response     bytes per    errors       resolve host establish    first byte   
                                                         Deviation                 length       second                                 connection                
                                                         (ms)                                                                                                    
@@ -345,11 +354,11 @@ In this example, we'll look at how to inspect the HTTP responses, and tell Grind
 Again we start with the test configuration:
 
     grinder.script = scripts/task3.py
-    
+
     grinder.runs = 10
     grinder.useConsole = false
     grinder.logDirectory = log
-    
+
     task3.urls = solutions/scripts/urls.txt
 
 Not much is changed here, so lets move on to the test script.
@@ -362,7 +371,7 @@ from net.grinder.plugin.http import HTTPRequest
 url_file_path = grinder.getProperties().getProperty('task3.urls')
 
 class TestRunner:
-    
+
     def __init__(self):
         url_file = open(url_file_path)
         self.tests = []
@@ -373,7 +382,7 @@ class TestRunner:
             self.tests.append((request, url))
         url_file.close()
         grinder.statistics.setDelayReports(True)
-    
+
     def __call__(self):
         for request, url in self.tests:
             response = request.GET(url)
@@ -383,7 +392,7 @@ class TestRunner:
 
     def fail(self):
         grinder.statistics.getForLastTest().setSuccess(False)
-            
+
     def is_valid(self, response):
         if len(response.getData()) < 10: return False
         if response.getStatusCode() != 200: return False
@@ -409,7 +418,7 @@ We won't go into how to do that here, but you might have a look at [this example
 
 By running the script we get these new results:
 
-                 Tests        Errors       Mean Test    Test Time    TPS          Mean         Response     Response     Mean time to Mean time to Mean time to 
+                 Tests        Errors       Mean Test    Test Time    TPS          Mean         Response     Response     Mean time to Mean time to Mean time to
                                            Time (ms)    Standard                  response     bytes per    errors       resolve host establish    first byte   
                                                         Deviation                 length       second                                 connection                
                                                         (ms)                                                                                                    
@@ -473,14 +482,14 @@ from net.grinder.plugin.http import HTTPRequest
 from org.json import *
 
 class TestRunner:
-    
+
     def __init__(self):
         test1 = Test(1, "GET some JSON")
         self.request1 = test1.wrap(HTTPRequest())
 
         test2 = Test(2, "GET profilepicture")
         self.request2 = test2.wrap(HTTPRequest())
-    
+
     def __call__(self):
         # Fetches the initial JSON
         response = self.request1.GET("http://grinder.espenhh.com/json.php")
@@ -515,7 +524,7 @@ To get down to action and actually perform some more HTTP requests (that's Grind
 
 Running this script, we get the following output:
 
-                 Tests        Errors       Mean Test    Test Time    TPS          Mean         Response     Response     Mean time to Mean time to Mean time to 
+                 Tests        Errors       Mean Test    Test Time    TPS          Mean         Response     Response     Mean time to Mean time to Mean time to
                                            Time (ms)    Standard                  response     bytes per    errors       resolve host establish    first byte   
                                                         Deviation                 length       second                                 connection                
                                                         (ms)                                                                                                    
@@ -525,7 +534,7 @@ Running this script, we get the following output:
 
     Totals       4            0            186.50       183.85       2.62         2958.00      7753.60      0            381.00       421.00       174.50   
 
-We here see that we are doing one GET-request to get the initial JSON, and then the loop performs three GET-requests to get the profile-pictures. By coding your tests this way (and having a good and RESTful API to test agains, which contains links), you'll be able to write small and simple tests that tests big amounts of functionality with simple code. They'll also be quite robust and won't break if you change your backend in small ways. 
+We here see that we are doing one GET-request to get the initial JSON, and then the loop performs three GET-requests to get the profile-pictures. By coding your tests this way (and having a good and RESTful API to test agains, which contains links), you'll be able to write small and simple tests that tests big amounts of functionality with simple code. They'll also be quite robust and won't break if you change your backend in small ways.
 
 Example 5 - Using Grinder's TCPProxy to automatically generate tests
 --------------------------------------------------------------------
@@ -542,7 +551,7 @@ Here, we'll let you do the hard lifting yourself. Using the scripts provided in 
 1. Try running the script: ./startAgent.sh proxy/proxygeneratedscript.sh
 1. Check the log, try modifying the script, experiment. You can start by removing all the sleep statements in the script. Then try it on a more complicated page.
 
-As you'll see, the scripts generated using this method will be ugly as hell, and overly complex. Therefore, we really don't recommend using the Grinder TCPProxy to generate scripts which you plan to be using and maintaining in the future. But for one-time scripts, it can be quite handy. 
+As you'll see, the scripts generated using this method will be ugly as hell, and overly complex. Therefore, we really don't recommend using the Grinder TCPProxy to generate scripts which you plan to be using and maintaining in the future. But for one-time scripts, it can be quite handy.
 
 
 Summary

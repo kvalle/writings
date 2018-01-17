@@ -1,10 +1,16 @@
+---
+date: 2013-08-05
+title: Continuations og CPS
+description: "*In Norwegian.* Introduserer Continuations, forklarer hvordan en ved hjelp av disse kan transformere programmer til Continuation Passing Style (CPS), og undersøker hvordan dette påvirker programmets kjøreegenskaper."
+---
+
 # Continuations og CPS
 
 Programmering—for en verden full av merkelige og fantastiske idéer og konsepter.
-I dag har jeg lyst til å skrive litt om noe jeg lærte om da jeg var på [Lambda Jam](http://lambdajam.com/)-konferansen i Chicago i sommer. 
+I dag har jeg lyst til å skrive litt om noe jeg lærte om da jeg var på [Lambda Jam](http://lambdajam.com/)-konferansen i Chicago i sommer.
 Der var jeg blant annet på en [workshop om Program Transformations](http://lambdajam.com/sessions#amin) med [William Byrd](https://twitter.com/webyrd) og [Nada Amin](https://twitter.com/nadamin).
 Denne bloggposten omhandler noe av det aller mest grunnleggende vi gikk igjennom der.
-Det skal handle om *continuation passing style* (CPS) en måte å skrive om programmer slik at de blir slitsomme å lese, men får noen fine egenskaper. 
+Det skal handle om *continuation passing style* (CPS) en måte å skrive om programmer slik at de blir slitsomme å lese, men får noen fine egenskaper.
 
 Mer konkret skal vi se på hvordan vi med utgangspunkt i eksisterende kode kan skrive denne om slik at algoritmen bevares utendret, mens programmets behov for bruk av kall-stack elimineres.
 Dette blir teoretisk, for de aller fleste fullstendig unyttig, og forhåpentlig ganske artig (i alle fall for noen spesielt interesserte).
@@ -14,9 +20,9 @@ Dette blir teoretisk, for de aller fleste fullstendig unyttig, og forhåpentlig 
 Vi starter med en meget velkjent funksjon<sup>[1](#footnote-1)</sup> for alle som har lest (funksjonelle) kodeekesmpler på internett: Factorial!
 
 ```scheme
-> (define factorial 
+> (define factorial
     (lambda (n)
-      (if (= n 0) 
+      (if (= n 0)
           1
           (* n (factorial (- n 1)))))
 > (factorial 5)
@@ -53,7 +59,7 @@ Ofte kan vi lage en ekvivalent implementasjon som er tail-rekursiv, noe som (git
       (if (= n 0)
           acc
           (factorial-iter (- n 1) (* n acc)))))
-> (define factorial 
+> (define factorial
     (lambda (n)
       (factorial-iter n 1)))
 > (factorial 5)
@@ -78,7 +84,7 @@ Igjen, la oss se på hvordan kall-stacken vokser:
 ```
 
 Dette er oppførselen vi ønsker — kallet til `factorial` klarer seg med én enkelt stack-frame uansett hvor stor input blir.
-Men selv om denne omskrivingen fungerer bra er det dessverre slik at det i mange tilfeller vil være vanskelig å komme opp med en ekvivalent tail-rekursiv algoritme for problemet en har løst. 
+Men selv om denne omskrivingen fungerer bra er det dessverre slik at det i mange tilfeller vil være vanskelig å komme opp med en ekvivalent tail-rekursiv algoritme for problemet en har løst.
 
 Men fortvil ikke, det finnes en generell løsning for hvordan en kan oppnå dette. For å komme frem til denne, la oss først ta et par steg tilbake for å se på et konsept vi vil få bruk for.
 
@@ -103,17 +109,17 @@ Vi kan gjøre dette ved å, i stedet for å *returnere*, la verdien *fortsette* 
 
 Funksjonen `k`<sup>[3](#footnote-3)</sup> retpresenterer "arbeidet som gjenstår etter at funksjonen er ferdig". Vi regner ut resultatet av funksjonen, og sender dette videre til resten av programmet. Tidligere ville "resten" vært hvor enn i koden kallet til funksjonen ble foretatt, mens resten av det som skal gjøre nå er `k` sitt ansvar.
 
-En måte å tenke på continuations er som [lambda-abstraksjoner over hull i koden](https://github.com/namin/lambdajam/blob/master/cps-work.scm). Ta for eksempel følgende utrykk: 
+En måte å tenke på continuations er som [lambda-abstraksjoner over hull i koden](https://github.com/namin/lambdajam/blob/master/cps-work.scm). Ta for eksempel følgende utrykk:
 
 ```scheme
 > (+ 1 (- 2 (+ 3 4)))
 -4
-``` 
+```
 
 Vi ønsker å lage en continuation som representerer arbeidet som gjenstår etter at vi har regnet ut `(+ 3 4)`. Dette kan vi gjør ved å bytte `(+ 3 4)` med en variabel, for eksempel `HULL`, og pakke alt inn i en lambda-funksjon som tar inn denne variabelen.
 
 ```scheme
-(lambda (HULL) 
+(lambda (HULL)
   (+ 1 (- 2 HULL)))
 ```
 
@@ -123,7 +129,7 @@ Denne lambda-funksjonen er en continuation som representerer evalueringen som vi
 > (define +&
     (lambda (x y k)
       (k (+ x y))))
-> (+& 3 4 (lambda (HULL) 
+> (+& 3 4 (lambda (HULL)
     (+ 1 (- 2 HULL))))
 -4
 ```
@@ -152,7 +158,7 @@ La oss ta for oss et enkelt eksempel. Vi begynner med følgende funksjon, `add-d
 Denne funksjonen kan skrives om som følger, for å følge continuation passing style.
 
 ```scheme
-(define add-double/k 
+(define add-double/k
   (lambda (x y k)
     (+& x y (lambda (xy)
         (k (* 2 xy))))))
@@ -177,11 +183,11 @@ Eksempelet vi tar for oss er Pythagoras' formel for å regne ut hypotenus. Her e
 
 
 ```scheme
-(define square 
-  (lambda (x) 
+(define square
+  (lambda (x)
     (* x x)))
 
-(define hypo 
+(define hypo
   (lambda (a b)
     (sqrt (+ (square a)
        (square b)))))
@@ -190,7 +196,7 @@ Eksempelet vi tar for oss er Pythagoras' formel for å regne ut hypotenus. Her e
 La oss starte med å konvertere `square` til CPS og kalle denne `square/k`. For å gjøre dette benytter vi først følgende regel.
 
 > Alle lambda-uttrykk skal utvides med et ekstra argument, før en fortsetter å transformere funksjonskroppen til lambdaen.
-> 
+>
 > ```scheme
 > (lambda (x ...) KROPP) => (lambda (x ... k) KROPP^)
 > ```
@@ -224,7 +230,7 @@ Det neste vi må gjøre er å finne det første uttrykket som kan evalueres. I d
 Regelen for å behandle kroppen til lambda-uttrykk blir noe slikt som:
 
 > Identifiser første uttrykk som kan evalueres. Utfør dette og send en continuation-lambda som siste argument. Denne lambdaen skal inneholde transformasjonen av de resterende stegene.
-> 
+>
 > ```scheme
 > (f (g (h i))) => (h i (lambda (hi) (f (g hi))))
 > ```
@@ -234,7 +240,7 @@ Reglen forteller oss at vi skal starte med å utføre utregningen av kvadratet a
 ```scheme
 (define hypo/k
   (lambda (a b k)
-    (square/k a (lambda (a-square) 
+    (square/k a (lambda (a-square)
                    NOE))))
 ```
 
@@ -243,7 +249,7 @@ Vi vet at det neste uttrykket vi må evaluere er `(square b)`, så dette er det 
 ```scheme
 (define hypo/k
   (lambda (a b k)
-    (square/k a (lambda (a-square) 
+    (square/k a (lambda (a-square)
                   (square/k b (lambda (b-square)
                                 NOE))))))
 ```
@@ -253,7 +259,7 @@ Begge argumentene til `+` er nå evaluert og vi kan derfor kalle denne. Vi bruke
 ```scheme
 (define hypo/k
   (lambda (a b k)
-    (square/k a (lambda (a-square) 
+    (square/k a (lambda (a-square)
                   (square/k b (lambda (b-square)
                                 (+& a-square b-square (lambda (a-square-plus-b-square)
                                                          NOE))))))))
@@ -264,7 +270,7 @@ Alt som nå gjenstår er å ta kvadratroten for å få det endelige resultatet. 
 ```scheme
 (define hypo/k
   (lambda (a b k)
-    (square/k a (lambda (a-square) 
+    (square/k a (lambda (a-square)
                   (square/k b (lambda (b-square)
                                 (+& a-square b-square (lambda (a-square-plus-b-square)
                                                         (k (sqrt a-square-plus-b-square))))))))))
@@ -297,7 +303,7 @@ La oss ta en ny titt på det innldende eksempelet, og skriver gradvis `factorial
 ```scheme
 (define factorial/k
   (lambda (n k)
-    (if (= n 0) 
+    (if (= n 0)
         1
         (* n (factorial (- n 1))))))
 ```
@@ -311,7 +317,7 @@ Tidligere ville vi startet med å lage en continuation over `(= n 0)`, predikate
 ```scheme
 (define factorial
   (lambda (n k)
-    (if (= n 0) 
+    (if (= n 0)
         (k 1)
         (* n (factorial (- n 1))))))
 ```
@@ -365,9 +371,9 @@ Og for de som måtte lure på hvordan koden ville sett ut dersom vi ikke hadde v
 > (define factorial/k
     (lambda (n k)
       (=& n 0 (lambda (is-zero)
-                (if is-zero 
+                (if is-zero
                     (k 1)
-                    (-& n 1 (lambda (n-minus-1) 
+                    (-& n 1 (lambda (n-minus-1)
                               (factorial/k n-minus-1 (lambda (fact-n-minus-1)
                                                        (*& n fact-n-minus-1 k))))))))))
 > (factorial/k 5 empty-k)
@@ -376,7 +382,7 @@ Og for de som måtte lure på hvordan koden ville sett ut dersom vi ikke hadde v
 
 ## Et siste eksempel
 
-La oss avslutte med et siste eksempel. 
+La oss avslutte med et siste eksempel.
 I funksjoner der det gjøres flere rekursive kall er det ofte ikke like enkelt å finne en løsning som baserer seg på bruk av en akkumulator, slik vi kunne for factorial.
 
 ```scheme
@@ -385,7 +391,7 @@ I funksjoner der det gjøres flere rekursive kall er det ofte ikke like enkelt �
     (cond
       [(zero? n) 1]
       [(= n 1) 1]
-      [else (+ (fib (- n 1)) 
+      [else (+ (fib (- n 1))
                (fib (- n 2)))])))
 ```
 
@@ -418,7 +424,7 @@ I eksemplene så vi hvordan det å bruke CPS som en generell taktikk for tvinge 
 
 [wiki-trampolining]: https://en.wikipedia.org/wiki/Trampoline_(computers)#High_level_programming
 
-Det er imidlertid ikke til å stikke under stol at den resulterende transformerte koden ikke er like konsis og lettlest som utgangspunktet. Koden "vrenges" på sett og vis inn-ut. Prosessen med å konvertere programmer krever også en hel del konsentrasjon, og det er lett å gjøre feil. 
+Det er imidlertid ikke til å stikke under stol at den resulterende transformerte koden ikke er like konsis og lettlest som utgangspunktet. Koden "vrenges" på sett og vis inn-ut. Prosessen med å konvertere programmer krever også en hel del konsentrasjon, og det er lett å gjøre feil.
 
 Dette er ikke en teknikk som vanligvis brukes manuelt av mange programmerere, men i langt større grad vanlig å bruke som steg i kompilatorer og liknende. Det er likevel morsomt å vite at en har muligheten dersom behovet skulle oppstå, og det er en viktig transformasjon å kjenne til hvis en har lyst til å lære om kompilering av høynivå språk.
 

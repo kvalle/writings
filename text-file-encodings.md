@@ -1,3 +1,9 @@
+---
+date: 2011-10-31
+title: Working with text encoding from the command line
+description: "Everyone has a horror story about text encoding. Fortunately, in many cases all you need is the command line and two simple commands: `file` and `iconv`."
+---
+
 # Working with text encoding from the command line
 
 Today I was faced with the follwing task: given a directory of files of various and unknown encodings, convert them all to UTF-8.
@@ -18,7 +24,7 @@ To print only the needed information we add a few more options, as follows.
 
     $ file -b --mime-encoding test.txt
     iso-8859-1
-    
+
 `--mime-encoding` specifies that only the encoding part should be printed, and `-b` (brief) ommits the name of the file from the output.
 
 ## Step 2: convert files
@@ -28,7 +34,7 @@ Once the current encoding of a file has been determined, the `iconv` command can
 The following will print the contents of `test.txt` to `stdout` as UTF-8.
 
     $ iconv -f iso-8859-1 -t utf-8 test.txt
-    
+
 Using the `-o` option, the output can also be redirected back to the file.
 
     $ iconv -f iso-8859-1 -t utf-8 test.txt -o test.txt
@@ -49,4 +55,3 @@ do
     iconv -f $FROM -t $TO $i -o $i
 done
 ```
-

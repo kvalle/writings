@@ -1,3 +1,0 @@
-date: 2013-08-05
-title: Continuations og CPS
-description: "*In Norwegian.* Introduserer Continuations, forklarer hvordan en ved hjelp av disse kan transformere programmer til Continuation Passing Style (CPS), og undersøker hvordan dette påvirker programmets kjøreegenskaper."

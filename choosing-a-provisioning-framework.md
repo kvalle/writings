@@ -1,10 +1,19 @@
+---
+title: Choosing a provisioning framework
+date: 2015-12-07
+external: http://open.bekk.no/choosing-a-provisioning-framework
+description: "So, you have decided that your infrastructure needs automatic provisioning. But which framework should you use? If you are new to the world of provisioning, it might be hard to know what to look for in a good framework. Here are some considerations you should be aware of before you make your final decision."
+other_authors:
+  - Sveinung Dalatun
+---
+
 So, you have decided that your infrastructure needs automatic provisioning. But which framework should you use? If you are new to the world of provisioning, it might be hard to know what to look for in a good framework. Here are some considerations you should be aware of before you make your final decision.
 
 There are many good provisioning frameworks out there. Among the most mature ones at the moment are [Chef](https://www.chef.io/chef), [Ansible](http://www.ansible.com), [Salt](http://docs.saltstack.com/en/latest/), and [Puppet](http://puppetlabs.com). And there might very well be others worth considering too. So, how do you differentiate between them?
 
 ## Two aspects
 
-As we see it, there are two main aspects to consider when evaluating a provisioning framework. 
+As we see it, there are two main aspects to consider when evaluating a provisioning framework.
 
 ![Two aspescts of a framework](https://bekkopen.blob.core.windows.net/attachments/e78b6072-d8f1-467e-adc5-04393f533ad6)
 
@@ -29,7 +38,7 @@ Lastly, your choice of a model will affect what software you will have to instal
 
 The pull model is supported by *Puppet*, *Ansible*, and *Chef Solo*.
 
-If you need your provisioning to be highly scalable, you probably want the pull model. Here you upload the latest configuration changes to the master provisioning node, which then simply stores it. It is the responsibility of each of your other servers to pull the master regularly and apply any updates. 
+If you need your provisioning to be highly scalable, you probably want the pull model. Here you upload the latest configuration changes to the master provisioning node, which then simply stores it. It is the responsibility of each of your other servers to pull the master regularly and apply any updates.
 
 This leads to the drawback that you don't control when provisioning is done. You also need an agent pre-installed on each of the nodes. And you really need to make sure your master stays up, or you risk having an update reach only some of your nodes.
 
@@ -86,13 +95,13 @@ After determining which model is right for you, you still have to find the best 
 
 - **Does it support parametrization?**
 
-	Parametrizing your code and thereby separating the data from the logic has several benefits. 
+	Parametrizing your code and thereby separating the data from the logic has several benefits.
 
 	For one thing, extracting things out into variables and data structures can help keeping your code [DRY](https://en.wikipedia.org/wiki/Don't_repeat_yourself). When the logic is no longer tied to a specific set of values, and you might be able to reuse it more easily. You know that code you were planning to write to set up a reverse proxy? Now you can reuse it when you need a different proxy.
 
 	Having your data independent of the DSL of the framework will also prove very useful the day you choose to change frameworks, as the data structures will be easily reusable, while you have to throw away the framework specific logic.
 
-	And finally, no matter how nice and readable the DSL is, it can't beat pure data structures. 
+	And finally, no matter how nice and readable the DSL is, it can't beat pure data structures.
 
 
 Some of these questions might be more or less important depending on your situation. For instance, readability is very important if many new people will need to involve themselves in provisioning, but less so if your team is small and has low turnover. Make sure you adress the questions important to you.

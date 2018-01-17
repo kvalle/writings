@@ -1,3 +1,9 @@
+---
+date: 2011-10-11
+title: Graph-based Representations for Text Classification
+description: "TL;DR of a significant portion of my MSc thesis on how to use graphs to extract information from textual documents in order to improve text classification."
+---
+
 # Graph-based Representations for Text Classification
 
 The above is also the title of a paper I presented at the [INWWCT](http://events.idi.ntnu.no/inwwct2011/ "India-Norway Workshop on Web Concepts and Technologies") at [NTNU](http://www.ntnu.edu "Norwegian University of Science and Technology") last Monday.
@@ -58,7 +64,7 @@ In the co-occurrence networks, we connect two terms, or nodes, if they occur wit
 A textual context is some specified part of the document, which means we basically link terms if they occur close together in the text.
 
 Of the many possible definitions of contexts, we experimented with *sentences* and *n-word windows*.
-While sentences should be self explanatory -- two terms are connected if they occur within the same sentence anywhere in the document. 
+While sentences should be self explanatory -- two terms are connected if they occur within the same sentence anywhere in the document.
 The n-word windows, on the other hand, are sequences of n consecutive terms.
 Thus, any terms occurring less than n words apart are co-occurring and linked in the network.
 
@@ -73,7 +79,7 @@ The parser a single sentence as input, and produces a list of dependencies betwe
 The terms and these dependencies can be seen as a sub-graph of the overall dependency network representing the document.
 By merging dependency graphs constructed from each of the sentences, we constructed networks for the entire documents.
 
-Below is an example of a dependency graph constructed from a random sentence from one of our corpora. 
+Below is an example of a dependency graph constructed from a random sentence from one of our corpora.
 Are you able to reconstruct the sentence from the graph?
 Even if you are not, the essence of the sentence should be obvious.
 
@@ -85,21 +91,21 @@ Once the document is constructed as a network, the next step is to evaluate the 
 To do this, we employ the concept of *node centrality*.
 The centrality of a node is a measure of how important it is compared to the other nodes in the network.
 
-There exists a myriad of different node centrality measures. 
+There exists a myriad of different node centrality measures.
 These can roughly be divided into four main categories as illustrated by the figure below.
 
 ![Node centrality measures](/img/graph-representation/centrality-mindmap.png)
 
 The simplest category is the degree-based centrality.
-These define node centrality in terms of the number and strengths of connections between a node and its neighbors. 
+These define node centrality in terms of the number and strengths of connections between a node and its neighbors.
 
 The eigenvector centralities are also based on the node's neighbours, but is a bit more complex.
-These measures capture not only the number of neighbors a node has, but also take into account the importance of each neighbour. 
+These measures capture not only the number of neighbors a node has, but also take into account the importance of each neighbour.
 This group include among others, Google’s famous PageRank algorithm.
 
 The groups of closeness and betweenness centrality measures are a bit different, in that they focus more on the overall network structure.
-Closeness centralities are defined in terms of the lengths of the shortest paths from a node to the rest of the nodes in the network. 
-Betweenness centrality describes whether, and how frequently, a node is part of the shortest paths between pairs of other nodes in the network. 
+Closeness centralities are defined in terms of the lengths of the shortest paths from a node to the rest of the nodes in the network.
+Betweenness centrality describes whether, and how frequently, a node is part of the shortest paths between pairs of other nodes in the network.
 
 In an attempt to find a node centrality measure well suited for capturing term importance, we experimented with all the measures shown in the figure above.
 The figure below shows classification accuracies when using representations based on different centrality measures.
@@ -152,4 +158,3 @@ However, we believe these results to be an indication that this graph-based appr
 
 *By the way, if you're still reading this, and is interested in more, <a href="/files/thesis.pdf">my MSc thesis</a> is also available.*
 *It discusses everything from this post and the paper, but focus on representations for texutal Case-Based Reasoning.*
-

@@ -1,3 +1,9 @@
+---
+title: Embedding GitHub gists with Jekyll
+date: 2012-01-03
+description: "When writing blog posts with Jekyll, Firefox would choke on the HTML. This is how you fix it."
+---
+
 # Embedding GitHub gists with Jekyll
 
 > Update: Since writing this post, I've started using the [Gist Tag for Jekyll](http://brandontilley.com/2011/01/30/gist-tag-for-jekyll.html) by Brandon Tilley.
@@ -8,7 +14,7 @@ I was embedding some code as a [GitHub gist](https://gist.github.com/), and sudd
 Viewing the HTML source I could see perfectly well that everything was there, but Firefox would for some reason not render it.
 
 After quite a while of debugging and searching for answers, I found the problem.
-It would seem that [Maruku](https://github.com/nex3/maruku), the Markdown interpreter used by Jekyll, minimizes empty HTML tags. 
+It would seem that [Maruku](https://github.com/nex3/maruku), the Markdown interpreter used by Jekyll, minimizes empty HTML tags.
 Thus, my
 
 ```html

@@ -1,3 +1,12 @@
+---
+title: Lister og sekvenser — Idiomatisk Python del 2
+date: 2012-10-15
+external: http://open.bekk.no/lister-og-sekvenser-idiomatisk-python-del-2/
+description: "*In norwegian.* Gjennomgang av hvilke konstrukter Python tilbyr for å jobbe med sekvenser av data, og hvordan disse kan brukes på en mest mulig idomatisk måte."
+other_authors:
+    - Magnus Haug
+---
+
 Denne blogposten fortsetter der vi slapp i [del 1](http://open.bekk.no/idiomatisk-python/), og tar for seg typiske idiomer for å arbeide med sekvenser i Python.
 Vi vil vise eksempler på mekanismer Python tilbyr, og se på hvilke fordeler disse gir.
 
@@ -15,7 +24,7 @@ Syntaksen for å skrive list comprehensions er som følger.
 resultat = [uttrykk for element in liste if betingelse]
 ```
 
-`uttrykk` evalueres for hver iterasjon av `for element in liste`, og resultatet av hver av disse havner som et element i `resultat`. 
+`uttrykk` evalueres for hver iterasjon av `for element in liste`, og resultatet av hver av disse havner som et element i `resultat`.
 Det siste leddet, `if betingelse` er valgfritt, og lar oss ekskludere elementer vi ikke ønsker å ta med i lista.
 
 ### Et enkelt eksempel
@@ -30,7 +39,7 @@ På klassisk imperativt vis med for-løkke:
 >>> for i in range(100):
 ...     if i**2 % 7 == 0:
 ...         resultat.append(i**2)
-... 
+...
 >>> resultat
 [0, 49, 196, 441, 784, 1225, 1764, 2401, 3136, 3969, 4900, 5929, 7056, 8281, 9604]
 ```
@@ -41,7 +50,7 @@ Denne koden kan gjøres mye penere ved hjelp av list comprehensions:
 >> [i**2 for i in range(100) if i**2 % 7 == 0]
 [0, 49, 196, 441, 784, 1225, 1764, 2401, 3136, 3969, 4900, 5929, 7056, 8281, 9604]
 ```
-    
+
 Kodesnuttene over utrykker nøyaktig det samme, men den siste benytter et vanlig idiom i Python og blir dermed kortere og langt mer lettlest.
 
 ### Comprehensions med nøstede løkker
@@ -172,7 +181,7 @@ Så kan vi bruke den nye iteratoren vår slik:
 ## Generatorer
 
 Selv om det kan være svært kraftfult å implementere egne iteratorer, slik at en kan iterere over vanlige domeneobjekter, kan det til tider føles klunkete.
-*Generatorer* er funksjoner som returnerer iteratorer, hvilket gir oss en kraftfull måte å lage den samme funksjonaliteten, men med en betraktelig mer lettlest syntaks. 
+*Generatorer* er funksjoner som returnerer iteratorer, hvilket gir oss en kraftfull måte å lage den samme funksjonaliteten, men med en betraktelig mer lettlest syntaks.
 
 Her er countdown-iteratoren fra forrige eksempel implementert som en generator:
 
@@ -217,7 +226,7 @@ Under er et veldig enkelt eksempel på at vi plukker elementer fra en uendelig i
 
 # Generator expressions
 
-En list comprehension kan nesten direkte oversettes til et generator-uttrykk. 
+En list comprehension kan nesten direkte oversettes til et generator-uttrykk.
 Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer.
 På samme måte som en vanlig generator kan sees på som en funksjon som returnerer en iterator, er generator expressions en måte å definere iteratorer ved hjelp av *uttrykk*.
 
@@ -229,11 +238,11 @@ Her er et trivielt eksempel på å iterere over en liste:
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 >>> for i in liste:
 ...   print i,
-... 
+...
 0 1 2 3 4 5 6 7 8 9
 >>> for i in liste:
 ...   print i,
-... 
+...
 0 1 2 3 4 5 6 7 8 9
 ```
 
@@ -245,15 +254,15 @@ Her er et trivielt eksempel på å iterere over en liste:
 <generator object <genexpr> at 0x10ff3e410>
 >>> for i in generator:
 ...   print i,
-... 
+...
 0 1 2 3 4 5 6 7 8 9
 >>> for i in generator:
 ...   print i,
-... 
+...
 ```
 
 Hva skjedde her? Iteratorer kan man kun iterere over én gang, før man må instansiere dem på ny eller eventuelt resette dem.
-Ei liste kan selvfølgelig itereres over så mange ganger man vil. 
+Ei liste kan selvfølgelig itereres over så mange ganger man vil.
 Generator-uttrykket lager en iterator for oss, så dette objektet kan kun itereres over én gang.
 
 #### Fordeler
@@ -274,4 +283,3 @@ Til slutt vil vi anbefale David Beazleys to særdeles gode presentasjoner om [en
 - *List comprehensions* er en hendig syntaks for å lage/filtrere/mutere lister, og kan uttrykke mange ting på en langt mer lettlest måte enn i mange andre språk.
 - *Iteratorer* gir oss muligheten til å generere (uendelig) lange sekvenser uten at disse må lagres i minnet.
 - *Generatorer* og *generator expressions* er to enkle måter å definere iteratorer på.
-

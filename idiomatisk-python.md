@@ -1,3 +1,12 @@
+---
+title: Idiomatisk Python
+date: 2012-09-21
+external: http://open.bekk.no/idiomatisk-python/
+description: "*In norwegian.* Diskusjon av hva som menes med *pythonisk* kode, og hvordan en spiller på de styrkene Python har, i stedet for å bare skrive Java eller C med en litt penere syntaks."
+other_authors:
+    - Magnus Haug
+---
+
 I denne bloggposten skal vi gå nærmere inn på hva idiomatisk Python er.
 Denne bloggposten er beregnet for de som kjenner grunnleggende Python,
 men krever absolutt ikke at man har kodet mye i språket.
@@ -109,7 +118,7 @@ Det regnes generelt som mer pythonisk å følge EAFP, men ikke glem at det vikti
 
 ## Magiske metoder
 
-Magiske metoder, eller [special method names](http://docs.python.org/reference/datamodel.html#specialnames) som de heter i Pythons offisielle dokumentasjon, er et kraftfullt verktøy som det er vel verdt å lære å bruke. 
+Magiske metoder, eller [special method names](http://docs.python.org/reference/datamodel.html#specialnames) som de heter i Pythons offisielle dokumentasjon, er et kraftfullt verktøy som det er vel verdt å lære å bruke.
 Disse metodene lar oss implementere egendefinert oppførsel for mange av Pythons innebygde operasjoner.
 
 Den første "magiske" metoden nye Python-programmerer blir introdusert for er gjerne `__init__`, som lar oss definere initialiseringen av et objekt.
@@ -150,7 +159,7 @@ Hvis en klasse implementerer en metode som heter `__call__`, så kan instanser a
 <__main__.Foo instance at 0xb72b9e2c>
 >>>
 >>> # kaller instansen, som fører til at __call__-metoden kjøres
->>> foo() 
+>>> foo()
 'bar'
 ```
 
@@ -165,7 +174,7 @@ try:
 except:
     # noe rives ned
 ```
-        
+
 Det som settes opp og rives ned kan for eksempel være en fil, en databasetilkobling som åpnes og lukkes, eller en databasetransaksjon som må committes eller rulles tilbake.
 For å slippe dette mønsteret støtter mange av Pythons innebygde klasser [with-uttrykk](http://docs.python.org/reference/compound_stmts.html#with). For [fil-objekter](http://docs.python.org/library/stdtypes.html#file-objects) kan vi da skrive:
 
@@ -234,13 +243,13 @@ import math
 class Vinkel:
     def __init__(self, grader):
         self.grader= grader
-        
+
     def set_grader(self, grader):
         self.radianer = grader * (math.pi/180)
-        
+
     def get_grader(self):
         return self.radianer * (180/math.pi)
-        
+
     grader = property(get_grader, set_grader)
 ```
 
@@ -257,7 +266,7 @@ Utenfra ser klassen helt lik ut:
 60
 ```
 
-`property`-funksjonen tar fire argumenter, der alle unntatt det første er valgfritt: `fget`, `fset`, `fdel`, `doc`. 
+`property`-funksjonen tar fire argumenter, der alle unntatt det første er valgfritt: `fget`, `fset`, `fdel`, `doc`.
 De tre første argumentene er funksjoner for å henholdsvis *lese*, *skrive*, og *slette* attributtet.
 Det siste argumentet er attributtets dokumentasjonstreng.
 
@@ -269,7 +278,7 @@ import math
 class Vinkel:
     def __init__(self, grader):
         self.grader = grader
-        
+
     @property
     def grader(self):
         return self.radianer * (180/math.pi)
@@ -287,4 +296,3 @@ Målet er rett og slett å skrive så enkel og lettlest kode som mulig.
 Denne bloggposten har tatt for seg noen konsepter som er idiomatiske for Python, blant annet duck typing, magiske metoder og with-uttrykk.
 I to kommende bloggposter skal vi gå nærmere inn på noen temaer som er sentrale når en arbeider i Python.
 Del 2 vil fokusere på lister, iteratorer og generatorer, mens vi i del 3 tar en nærmere titt på bruk av funksjoner i Python.
-

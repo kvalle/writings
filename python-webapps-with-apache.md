@@ -1,3 +1,10 @@
+---
+title: Serving Python Web Applications With Apache
+date: 2013-03-09
+description: Short tutorial on how to set up an Apache HTTP Server to serve Python webapps through the Web Server Gateway Interface (WSGI).
+external: http://open.bekk.no/serving-python-webapps-with-apache/
+---
+
 Python is a great language that is useful for many things, among them creating web applications.
 There is a [plethora of great web frameworks](http://wiki.python.org/moin/WebFrameworks) out there, and Python makes it nice and easy to do such things as [parsing json](http://docs.python.org/2/library/json.html) or [talking over HTTP](http://docs.python.org/2/library/httplib.html#module-httplib) out of the box.
 
@@ -143,14 +150,14 @@ Also notice that the directory is somewhere under your home folder, so make sure
 Secondly, we add the location of `greetr` to Pythons system path.
 We need to do this in order to be able to import the `greetr` modules, both from the wsgi-file, aswell as from within `greetr` itself.
 
-Finally we import `greetr`. 
+Finally we import `greetr`.
 This part might differ if you use a framework other than Flask, but you should in any case end up with an import named `application`, which is what Apache will be looking for.
 
 ## Configuring Apache
 
 At last, we need to configure Apache itself, by adding a [virtualhost configuration](http://httpd.apache.org/docs/2.2/vhosts/) for Greetr.
 
-The example project contains the configuration you need. 
+The example project contains the configuration you need.
 Simply copy [greetr.vhost](https://github.com/kvalle/greetr/blob/master/greetr.vhost) to the Apache site configuration folder:
 
 ```bash

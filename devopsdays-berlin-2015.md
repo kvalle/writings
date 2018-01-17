@@ -1,8 +1,18 @@
+---
+title: DevOpsDays Berlin 2015
+date: 2015-11-30
+external: http://open.bekk.no/devopsdays-berlin-2015
+description: "*In norwegian.* DevOpsDays er en av de viktigste konferansene som fokuserer på DevOps. Konferansen arrangeres mange ganger årlig på mange steder spredt over hele verden. Med BEKKs fokus på DevOps var det naturlig at vi var tilstede da konferansen nylig ble arrangert i Berlin."
+other_authors:
+  - Sveinung Dalatun
+  - Stein Inge Morisbak
+---
+
 **DevOpsDays er en av de viktigste konferansene som fokuserer på DevOps. Konferansen arrangeres mange ganger årlig på mange steder spredt over hele verden. Med BEKKs fokus på DevOps var det naturlig at vi var tilstede da konferansen nylig ble arrangert i Berlin.**
 
 Konferansen går over to dager og har et format som er litt ulikt mange andre konferanser. Forskjellen ligger i at siste halvdel av begge dagene består av [Open Spaces](https://en.wikipedia.org/wiki/Open_Space_Technology), lignende [Smidig](http://smidig.no) her til lands.
 
-Første halvdel av dagene besto av halvtimers foredrag i plenum. Mellom foredragene og open space ble det holdt en rekke _ignite talks_. Parallelt med open space var det også et track med _hands-on presentasjoner_. 
+Første halvdel av dagene besto av halvtimers foredrag i plenum. Mellom foredragene og open space ble det holdt en rekke _ignite talks_. Parallelt med open space var det også et track med _hands-on presentasjoner_.
 
 ## Hva ble det pratet om?
 
@@ -40,6 +50,6 @@ Under innledende sesjoner på konferansen ble det gjort narr av at alt mulig ska
 
 ## PS: DevOpsDays Oslo 2016
 
-I 2016 trenger du ikke lenger reise ut av Oslo for å delta på konferansen. Da er planen nemlig å arrangere DevOpsDays i Oslo for første gang. For å få det til trenger vi flere som ønsker å bidra. Les mer om [hva slags folk vi ser etter](http://www.meetup.com/DevOps-Norway/events/227099264/) hvis du kunne tenke deg å være med. 
+I 2016 trenger du ikke lenger reise ut av Oslo for å delta på konferansen. Da er planen nemlig å arrangere DevOpsDays i Oslo for første gang. For å få det til trenger vi flere som ønsker å bidra. Les mer om [hva slags folk vi ser etter](http://www.meetup.com/DevOps-Norway/events/227099264/) hvis du kunne tenke deg å være med.
 
 Vi gleder oss allerede!

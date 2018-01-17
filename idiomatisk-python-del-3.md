@@ -1,3 +1,12 @@
+---
+title: Funksjoner — Idiomatisk Python del 3
+date: 2012-10-22
+external: http://open.bekk.no/funksjoner-idiomatisk-python-del-3/
+description: "*In norwegian.* Hva betyr det at Python har førsteklasses funksjoner? Hvordan kan og bør en bruke disse? Og har egentlig dekoratorer med dette å gjøre?"
+other_authors:
+    - Magnus Haug
+---
+
 ## Funksjoner
 
 I Python har man stor frihet i hvordan man lager og bruker funksjoner.
@@ -41,10 +50,10 @@ Et argument som er en funksjon er ikke mer spesielt enn andre argumenter, bortse
 ```python
 >>> def foo():
 ...     print "HAI from foo, kthxbye"
-... 
+...
 >>> def bar(fn):
 ...     fn()
-... 
+...
 >>> bar(foo)
 HAI from foo, kthxbye
 ```
@@ -56,7 +65,7 @@ På tilsvarende måte er retur av en funksjon en vanlig retur, der navnet som re
 ...     def foo():
 ...             print "Greetings from foo"
 ...     return foo
-... 
+...
 >>> fn = bar()
 >>> fn()
 Greetings from foo
@@ -68,7 +77,7 @@ Eksempelet under viser en dictionary med funksjoner som verdier.
 ```python
 >>> def spam(n):
 ...     return "spam" * n
-... 
+...
 >>> data = {
 ...     'lag_spam': spam,
 ...     'lag_liste': range
@@ -79,7 +88,7 @@ Eksempelet under viser en dictionary med funksjoner som verdier.
 'spamspamspamspam'
 ```
 
-La oss oppsummere egenskapene til *førsteklasses* funksjoner. 
+La oss oppsummere egenskapene til *førsteklasses* funksjoner.
 En funksjon i Python kan:
 
 1. defineres på de fleste steder der en kan tilordne variabler, også inne i andre funksjoner.
@@ -138,7 +147,7 @@ Uten bruk av lambdaer må vi først definere en funksjon som forteller oss hvorv
 ```python
 >>> def er_partall(x):
 ...     return x % 2 == 0
-... 
+...
 >>> filter(er_partall, [4, 8, 15, 16, 23, 42])
 [4, 8, 16, 42]
 ```
@@ -205,7 +214,7 @@ For å forenkle ting holder vi oss til dekoratorer basert på vanlige funksjoner
 Dekorator-funksjonen kan definere funksjonalitet som skal skje før/etter at den dekorerte funksjonen kalles.
 Den kan også la være å kalle den dekorerte funksjonen i det hele tatt, endre på argumentene den får inn, og så videre.
 
-### Et enkelt eksempel 
+### Et enkelt eksempel
 
 La oss ta for oss et enkelt eksempel for å se hva som foregår.
 
@@ -217,11 +226,11 @@ La oss ta for oss et enkelt eksempel for å se hva som foregår.
 ...         fn()
 ...         print "SLUTTER WRAPPER"
 ...     return wrapper
-... 
+...
 >>> @dekorator
 ... def test():
 ...     print "TEST"
-... 
+...
 DEKORERER
 >>> test()
 STARTER WRAPPER
@@ -258,7 +267,7 @@ For å teste dekoratoren lager vi en funksjon som tar inn variabelt antall argum
 >>> @tell_argumenter
 ... def foo(*args, **kwargs):
 ...     pass
-... 
+...
 >>> foo()
 fikk inn 0 argumenter
 >>> foo(1, 2, 3)
@@ -376,12 +385,12 @@ Vi har dermed endret på hvordan den dekorerte funksjonen ser ut utenfra, ved å
 ...         # noe artig her
 ...         return fn(*args, **kwargs)
 ...     return ny_fn
-... 
+...
 >>> @buu_dekorator
 ... def foo():
 ...     """foo sin docstring"""
 ...     pass
-... 
+...
 >>> foo.__name__
 ny_fn
 >>> foo.__doc__
@@ -392,19 +401,19 @@ Dette kan vi passende nok løse ved hjelp av enda en dekorator!
 
 ```python
 >>> from functools import wraps
->>> 
+>>>
 >>> def yay_dekorator(fn):
 ...     @wraps(fn)
 ...     def wrapper(*args, **kwargs):
 ...         # noe artig her
 ...         return fn(*args, **kwargs)
 ...     return wrapper
-... 
+...
 >>> @yay_dekorator
 ... def foo():
 ...     """foo sin docstring"""
 ...     pass
-... 
+...
 >>> foo.__name__
 foo
 >>> foo.__doc__
@@ -425,25 +434,25 @@ Vi går rett på et kodeeksempel:
 ...             return [fn(*args, **kwargs) for i in range(ganger)]
 ...         return wrapper
 ...     return generert_dekorator
-... 
+...
 >>> @gjenta(4)
 ... def spam():
 ...     return "spam"
-... 
+...
 >>> spam()
 ['spam', 'spam', 'spam', 'spam']
 ```
 
 Her defineres dekoratoren `gjenta`, som tar inn argumentet som forteller hvor mange ganger den dekorerte funksjonen skal gjentas før resultatet av kallene returneres som en liste.
 
-`gjenta` er ikke helt som generatorene vi har laget så langt, men i praksis en funksjon som genererer dekoratorer, slik at `gjenta(4)` lager dekoratoren som gjentar funksjonen fire ganger, som så brukes til å dekorere `spam`. 
+`gjenta` er ikke helt som generatorene vi har laget så langt, men i praksis en funksjon som genererer dekoratorer, slik at `gjenta(4)` lager dekoratoren som gjentar funksjonen fire ganger, som så brukes til å dekorere `spam`.
 
 Tilsvarende uten det syntaktiske sukkeret:
 
 ```python
 >>> def spam():
 ...     return "spam"
-... 
+...
 >>> spam = gjenta(4)(spam)
 >>> spam()
 ['spam', 'spam', 'spam', 'spam']
@@ -464,4 +473,3 @@ Tilsvarende uten det syntaktiske sukkeret:
 
 - Dekoratorene erstatter den dekorerte funksjonen med en ny funksjon.
 - I praksis bare hendig syntaks for å benytte høyere ordens funksjoner.
-

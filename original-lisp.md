@@ -1,15 +1,24 @@
+---
+date: 2013-11-10
+title: Implementing (the original) Lisp in Python
+description: "To understand what Lisp is all about, let's go back to the roots and
+    have a look at John McCarthy's original Lisp. By implementing it in Python we see
+    how, with just a few basic operators and a simple concept of functions, we're able
+    to implement the rest of the language within itself."
+---
+
 # Implementing (the original) Lisp in Python
 
-As programmers we take great pride in keeping up with new developments in libraries, languages and tools (and usually have a lot of fun doing it as well). 
-If we stop learning, we know we'll soon end up like the Cobol-programmers of today. 
-And this is of course a good thing — there's always something new and exciting to learn, something on which to sharpen our skills. 
+As programmers we take great pride in keeping up with new developments in libraries, languages and tools (and usually have a lot of fun doing it as well).
+If we stop learning, we know we'll soon end up like the Cobol-programmers of today.
+And this is of course a good thing — there's always something new and exciting to learn, something on which to sharpen our skills.
 
 But sometimes I also find that it pays off to take a look at the old, rather than the new.
-It's good to go back to the roots, to see where it all comes from, and to have look at the fundemental ideas. 
-Today we'll take a trip back to 1960, to the origins of Lisp as described by John McCarthy in his paper [Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part 1][rec-func]. 
+It's good to go back to the roots, to see where it all comes from, and to have look at the fundemental ideas.
+Today we'll take a trip back to 1960, to the origins of Lisp as described by John McCarthy in his paper [Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part 1][rec-func].
 
-There is really nothing novel in this blogpost. 
-The ideas all belonged to McCarthy, but sometimes it's good to just study the masters. 
+There is really nothing novel in this blogpost.
+The ideas all belonged to McCarthy, but sometimes it's good to just study the masters.
 Lets explore the origins of one of our most powerful (family of) programming languages.
 We'll start by briefly covering the Lisp syntax and semantics, before moving on to an implementation of the language itself in Python.
 
@@ -43,7 +52,7 @@ When evaluating an s-expression `e`, the following rules apply.
 - If `e` is an atom its value is looked up in the environment.
 - Otherwise, the expression is a list like `(<e0> <e1> … <en>)`, which is evaluated as a function application. How this is handled depends on the first element of the list, `e0`.
     * If `e0` is the name of one of the builtin (axiomatic) forms, it is evaluated as described below.
-    * If `e0` is any other atom, its value is looked up. A new list, with the value of `e0` replacing the first element is then evaluated. 
+    * If `e0` is any other atom, its value is looked up. A new list, with the value of `e0` replacing the first element is then evaluated.
     * If `e0` is not an atom, but a list of the form `(lambda (<a1> … <an>) <body>)`, then `e1` through `en` is first evaluated. Then `body` is evaluated in an environment where each of `a1` through `an` points to the value of the corresponding `en`. This constitutes a call to an anonymous function (i.e. a `lambda` function).
     * If `e0` is of form `(label <name> <lambda>)` where `lambda` is a lambda expression like the one above, then a new list with `e0` replaced by just the `lambda` is constructed. This list is then evaluated in an environment where `name` points to `e`. The `label` notation is how we solve the problem of defining recursive functions.
 
@@ -56,13 +65,13 @@ The axiomatic forms are the basis on which the rest of the language rests. They 
     <dd>
         returns `e` without evaluating it first.
     </dd>
-    
+
     <dt>`(atom e)`</dt>
     <dd>
         evaluates `e` and returns the atom `t` if the resulting value is an atom, otherwise `f` is returned. (Since we have no boolean type in our language, these two atoms are treated as *true* and *false*, respectively.)
     </dd>
 
-    <dt>`(eq e1 e2)`</dt> 
+    <dt>`(eq e1 e2)`</dt>
     <dd>
         evaluates to `t` if both `e1` and `e2` evaluates to the same atom, otherwise `f`.
     </dd>
@@ -144,7 +153,7 @@ The function combines the power of `parse` and `eval`. `interpret` takes a Lisp 
 With parsing out of the way, and armed with the `interpret` function to test our code, it's time to have a look at the core of the langage, the `eval` function. It looks like this:
 
 ```python
-def is_atom(exp): 
+def is_atom(exp):
     """Atomes are represented by strings in our ASTs"""
     return isinstance(exp, str)
 
@@ -165,13 +174,13 @@ def eval(exp, env):
     elif exp[0][0] == "label": return label(exp, env)
 ```
 
-As you can see, `eval` takes two arguments `exp` and `env`. `exp` is one of the ASTs returned by `parse`, `env` holds a list of associations which represent bindings from atoms to values in the environment. 
+As you can see, `eval` takes two arguments `exp` and `env`. `exp` is one of the ASTs returned by `parse`, `env` holds a list of associations which represent bindings from atoms to values in the environment.
 
 We have now covered all the cases we need in order to implement the Lisp. Lets look at the implementation of each in turn. Keep the structure of `eval` in mind when we go through each case.
 
 ### Evaluating atoms
 
-The first case we need to cover is when the evaluated expression is an atom. 
+The first case we need to cover is when the evaluated expression is an atom.
 The value of an atom is whatever it is bound to in the environment, so we do a lookup of the atom in `env`.
 
 ```python
@@ -185,7 +194,7 @@ Lets have a look at how this works in the REPL:
 
 ```python
 >>> from rootlisp.lisp import interpret
->>> 
+>>>
 >>> env = [('foo', 'bar')]
 >>> interpret('foo', env)
 'bar'
@@ -344,7 +353,7 @@ To see what's happening, lets look at the environment after evaluating a `defun`
 ```python
 >>> env = []
 >>> interpret("""
-...     (defun pair (x y) 
+...     (defun pair (x y)
 ...         (cons x (cons y 'nil)))
 ... """, env)
 'pair'
@@ -418,8 +427,8 @@ Lets se an example:
 
 ```python
 >>> program = """
-...   ((label greet (lambda (x) 
-...                   (cond ((atom x) 
+...   ((label greet (lambda (x)
+...                   (cond ((atom x)
 ...                           (cons 'hello (cons x 'nil)))
 ...                         ('t (greet (car x))))))
 ...    '(world))
@@ -456,7 +465,7 @@ We might also define the common logical operators.
           ('t 'f)))
 
 (defun or (x y)
-    (cond (x 't) 
+    (cond (x 't)
           ('t (cond (y 't) ('t 'f)))))
 
 (defun not (x)
@@ -490,7 +499,7 @@ A couple of tests shows that it works:
 (a b)
 ```
 
-Another useful function is `zip`, which takes two lists as arguments, returning a list of pairs where each pair consists of the corresponding elements from each of the argument lists. 
+Another useful function is `zip`, which takes two lists as arguments, returning a list of pairs where each pair consists of the corresponding elements from each of the argument lists.
 
 ```common-lisp
 (defun pair (x y)
@@ -512,9 +521,9 @@ The helper function `pair` is simply used as a convenience for creating lists of
 
 ## Completing the language
 
-These functions are all nice and well, but one thing is still lacking. 
+These functions are all nice and well, but one thing is still lacking.
 One of the central concepts in Lisp is that *code is data*, and vice versa.
-We already have `quote` which enables us to convert code into lists, but we still need some way to evaluate lists as if they were Lisp code again. 
+We already have `quote` which enables us to convert code into lists, but we still need some way to evaluate lists as if they were Lisp code again.
 
 Our Lisp cannot do this yet. But, fortunately, we have enough pieces to be able to implement it within the Lisp itself!
 

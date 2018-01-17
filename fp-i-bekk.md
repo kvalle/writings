@@ -1,4 +1,11 @@
-# Funksjonell programmering i BEKK
+---
+title: Hvor funksjonelle er vi?
+date: 2017-12-20
+external: https://blogg.bekk.no/hvor-funksjonelle-er-vi-7414246ca1ae
+description: "*In norwegian.* Funksjonell programmering har hatt et oppsving de siste årene. Men hvor mye brukes det egentlig? Vi tar en titt på bruken av FP i prosjektene til BEKK."
+---
+
+# Hvor funksjonelle er vi?
 
 Funksjonell programmering (FP) er et gammelt paradigme som har hatt en liten renesanse de siste årene, med stadig sterkere fotfeste i bransjen. Vi har lenge sett funksjonelle konsepter snike seg inn i de vanligste imperative språkene våre, slik som Java, C# og JavaScript. Og på frontend-siden har tanken om å skrive views på en deklarativ måte blitt normen med [React](https://reactjs.org/).
 
@@ -20,7 +27,7 @@ Totalt har jeg kartlagt 37 forskjellige prosjekter, fordelt hos 26 ulike kunder.
      FP ▕█████     14 (38%)
     ¬FP ▕█████████ 23 (62%)
 
-Mer enn ett av tre prosjekter bruker altså FP i en eller annen grad. Det er altså ikke normen å bruke FP helt enda, men det er også langt fra obskurt.
+FP er fortsatt ikke det vanligste valget, men med bruk i over en tredjedel av prosjektene er det også langt fra obskurt.
 
 
 ### Hva regner vi som funksjonelt?
@@ -37,7 +44,7 @@ Det kan være interessant å vite at 38% av prosjektene våre bruker FP. Men det
 - Nivå 2 🎩: FP på interne eller lite viktige systemer
 - Nivå 3 👑: FP i produksjon på viktige systemer
 
-Hvis vi fordeler de 14 prosjektene som bruker FP per nivå, ser resultatet slik ut:
+Nivå 0 representerer altså de 23 som ikke bruker FP. Ser vi nærmere på de 14 prosjektene hvor FP er i bruk, fordelt på nivå, ser resultatet slik ut:
 
     Nivå 3 👑 ▕████████████████████ 10
     Nivå 2 🎩 ▕ 0

@@ -1,3 +1,10 @@
+---
+title: Programmering i fremtiden
+date: 2015-10-19
+external: http://open.bekk.no/programmering-i-fremtiden
+description: "*In norwegian.* Som programmerere, hvordan kommer hverdagen vår til å se ut noen år frem i tid? Oppsummering av temaer pratet om på årets Future Programming Workshop."
+---
+
 ![The Road Ahead](https://bekkopen.blob.core.windows.net/attachments/c9123bfb-d1b8-44d8-a49b-323f94490358)
 
 # Programmering i fremtiden
@@ -106,7 +113,7 @@ Jeg sitter igjen med følelsen av at det er mye som er uutforsket rundt dette te
 > Video: [The Gamma: Programming Tools for Data Journalism - Tomas Petricek](https://youtu.be/cYoO2RvZn7Y)
 
 
-### Constraint Logic Propagation Conflict Spreadsheets 
+### Constraint Logic Propagation Conflict Spreadsheets
 
 Har du noen gang hatt lyst til å programmere Excel med språk som minner om Prolog, mens du utforsker mulige scenarioer basert på dataene dine og leker med visualisering og annet snacks? Kan ikke si tanken hadde streifet meg heller. Men William Taysom er tydeligvis en mann med mange idéer rundt akkurat dette.
 
@@ -169,7 +176,7 @@ Er usikker på om dette er noe som er brukbart for spilldesignere flest per i da
 
 ## Konklusjoner
 
-Kom vi frem til hva programmering kommer til å være i fremtiden? Naturligvis ikke. 
+Kom vi frem til hva programmering kommer til å være i fremtiden? Naturligvis ikke.
 Det var dessverre ingenting som liknet på hverken brukergrensesnitt fra Minority Report eller J.A.R.V.I.S. fra IronMan, og det var ingen som hadde med seg quantium computers. Likevel var mange av idéene som ble presentert i løpet av dagen spennende, og vel verdt å utforske mer.
 
 Å se inn i fremtiden er i beste fall optimistisk. Men disse folkene har tanker om hvordan fremtiden *bør* se ut, og de jobber med å gjøre dem til realitet. Jeg tror arbeidet med å gjøre programmering tilgjengelig for folk flest er særlig viktig. Som en av foredragsholderne sa:

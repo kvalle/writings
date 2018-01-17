@@ -1,6 +1,12 @@
+---
+date: 2011-09-05
+title: Blogging with Jekyll & Git
+description: "So, I started a blog. This is how it works."
+---
+
 # Blogging with Jekyll & Git
 
-Yeah, so I finally created a blog. 
+Yeah, so I finally created a blog.
 I have been meaning to do this for some time now, but never really got around to it.
 The reason for that -- I think -- is at least partly because I find the mass of CMSs and blog engines out there genuinely unappealing.
 I have tested a few from time to time, and found them too complex for my needs, giving me too little control, and/or forcing me to work through web interfaces i didn't like.
@@ -31,7 +37,7 @@ module Liquid
             doc = Nokogiri::HTML::DocumentFragment.parse text
             p = doc.xpath('.//p')[0]
         end
-        
+
         def preview(text, delimiter = '<!-- end preview -->')
             if text.index(delimiter) != nil
                 text.split(delimiter)[0]
@@ -40,7 +46,7 @@ module Liquid
             end
         end
     end
-    
+
     Liquid::Template.register_filter(ExtendedFilters)
 
 end
@@ -48,7 +54,7 @@ end
 
 All it does is to add two additional filters for use with liquid.
 The `html_first_par` filter extracts the first paragraph from a piece of HTML.
-The `preview` filter looks for the occurrence of a HTML comment in the post, which indicate where the preview ends. 
+The `preview` filter looks for the occurrence of a HTML comment in the post, which indicate where the preview ends.
 If it finds no such comment, it simply uses the first filter to extract the first paragraph and shows it instead.
 
 In my <a href="/index.html">index.html</a>, the `preview` filter is used as in the following (somewhat simplified) example.
@@ -63,7 +69,7 @@ In my <a href="/index.html">index.html</a>, the `preview` filter is used as in t
 
 ## Publishing
 
-I initially wanted to host the site directly on GitHub, since their <a href="http://pages.github.com/">GitHub Pages</a> feature makes this really easy. 
+I initially wanted to host the site directly on GitHub, since their <a href="http://pages.github.com/">GitHub Pages</a> feature makes this really easy.
 All you need to do is:
 
 1. Create and push to a repository named `username.github.com`
@@ -80,7 +86,7 @@ GitHub can still be used, but then the site must be generated locally and the re
 Alternatively, the site can be hosted elsewhere, which is what I ended up doing.
 The choice fell on VPS hosting from <a href="http://www.linode.com/index.cfm">linode.com</a>.
 
-The setup here is slightly more elaborate than with GitHub pages. 
+The setup here is slightly more elaborate than with GitHub pages.
 After installing the essentials such as git and a webserver, all we need to do is make Git run Jekyll automatically.
 This can be done by adding the following simple post-receive hook in the server repository:
 
@@ -120,8 +126,7 @@ You can of course also change `ruby` to one of the other <a href="http://pygment
 Finally, here are a few other things that can be useful when using Jekyll.
 
 *   To display liquid samples without them being parsed, surround with `{% literal %}` and `{% endliteral %}` tags.
-*   Running Jekyll as a server continuously watching for changes and rebuilding is a great way to view the state of your site while working. 
-    However,  the `--auto` option may also hide errors from you. 
+*   Running Jekyll as a server continuously watching for changes and rebuilding is a great way to view the state of your site while working.
+    However,  the `--auto` option may also hide errors from you.
     If Jekyll fails while building the site, you'll be looking at the last working version -- not an error message!
 *   For additional ideas on how to use Jekyll, have a look at the extensive <a href="https://github.com/mojombo/jekyll/wiki/Sites">list of sites</a> that are already using it.
-

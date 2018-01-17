@@ -1,4 +1,10 @@
-## TL;DR: 
+---
+date: 2016-02-13
+title: Ping requiring sudo‽
+description: "The ping command suddenly started requiring sudo to run. This is why, and how to fix it."
+---
+
+## TL;DR:
 
 *Problem*: `ping` is complaining of `ping: icmp open socket: Operation not permitted"`.  
 *Solution*: Run `sudo chmod u+s /bin/ping` (or whatever `which ping` points to).

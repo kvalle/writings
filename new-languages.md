@@ -1,3 +1,10 @@
+---
+title: Learn New Languages!
+date: 2016-04-20
+external: http://open.bekk.no/learn-new-languages
+description: "I have long been a firm believer in learning new languages. I believe that the languages we speak strongly influence how we think, and what we are able to think about. Similarly, our programming languages influence our thinking about how to solve problems. This is why I believe you need to learn new languages, and their concepts, in order to become a better programmer."
+---
+
 ## Learn New Languages!
 
 I have long been a firm believer in learning new languages. I believe that the languages we speak strongly influence how we think, and what we are able to think about. Similarly, our programming languages are the tools by which we formalize our ideas as executable code, and so they influence our thinking about how to solve problems. Our thoughts are constrained by their concepts, by their fundamental building blocks.
@@ -8,11 +15,11 @@ Alan Perlis, in one of his his [Epigrams on Programming](http://pu.inf.uni-tuebi
 
 > "A language that doesn't affect the way you think about programming, is not worth knowing."
 
-While this is a somewhat pointed remark — there might sometimes be good reasons to get into a language similar to one you already know — I nonetheless consider it good advice. Seek out the strange and unfamiliar languages! It is only by learning new paradigms, or languages with concepts fundamentally different from those you know, that you truly change the way you think. These languages are of course also the hardest to learn. But once it clicks, the epiphany will be well worth the struggle to get there. 
+While this is a somewhat pointed remark — there might sometimes be good reasons to get into a language similar to one you already know — I nonetheless consider it good advice. Seek out the strange and unfamiliar languages! It is only by learning new paradigms, or languages with concepts fundamentally different from those you know, that you truly change the way you think. These languages are of course also the hardest to learn. But once it clicks, the epiphany will be well worth the struggle to get there.
 
 For me, some of these epiphanies have been things like the following:
 
-- **Making robust programs by letting them fail.** Erlang was designed at Ericsson in the 80s for creating robust and distributed systems. They solved this by embracing failures, not by trying to avoid them at all cost. Making self-healing systems that will re-spawn processes that go down, while making sure that the system as a whole keeps working, turned out to be a lot more powerful than simply trying to avoid failing. And it's an idea that can easily be applied to other languages as well. 
+- **Making robust programs by letting them fail.** Erlang was designed at Ericsson in the 80s for creating robust and distributed systems. They solved this by embracing failures, not by trying to avoid them at all cost. Making self-healing systems that will re-spawn processes that go down, while making sure that the system as a whole keeps working, turned out to be a lot more powerful than simply trying to avoid failing. And it's an idea that can easily be applied to other languages as well.
 - **Programming by constraints.** Sometimes it is a lot simpler to describe a problem, along with its constraints, rather than implementing a solution to the problem yourself. This is exactly how you do things with some declarative programming languages. The best known example of a language that works this way is Prolog, but some languages gives you the same abilities through libraries (e.g. MiniKanren in Scheme, or core.logic from Clojure).
 - **Programming without mutations.** In most functional languages you strive to avoid mutation, using purely immutable datastructures and variables. For me, realizing that mutable state isn't required to get things done really changed the way I think about programming. The degree to which this is enforced by the language varies among different functional languages, but good examples include Haskell, OCaml, F#, and various Lisps.
 - **Higher order programming.** Another epiphany you get by learning a functional language is that functions are no different from any other data type you work with. When functions are first class citizens you can write functions using other functions as input parameters or return values (thus creating higher-order functions). This adds a whole new layer of possibilities of how to express your programs.
